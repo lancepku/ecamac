@@ -41,26 +41,9 @@ Z1100 = Z1100
 end if
 end do
 Zamc = 0.25*abs(cord(int(Z1100),1,2)+cord(int(Z1100)+1,2,2)+cord(int(Z1100)+1,1,2)+cord(int(Z1100),2,2))+ D_axial
-Z600 = 1
-do j=1,nz
-tempar = temp(j,1)!+temp(j+1,nx/2)+temp(j,nx/2+1)+temp(j+1,nx/2+1))
-!do j=1,nz
-if (tempar.lt.600.)then
-Z600=j+1
-else if (tempar.ge.600)then
-Z600 = Z600
-end if
-end do
-!print *,Z1100
-HL=0.25*abs(cord(int(Z600),1,2)+cord(int(Z600)+1,2,2)+cord(int(Z600)+1,1,2)+cord(int(Z600),2,2))+D_axial
-print *, Zamc,HL,D_axial
-open (10,file='result.dat')
-write(10,*),Zamc,HL,D_axial
-close(10)
-
 rate_inject_c = Hc_/Zamc*vp_
 rate_inject = min(vp_,rate_inject_c)
-print *,'M',rate_inject/Vp_,'Hc_',Hc_
+!print *,'M',rate_inject/Vp_,'Hc_',Hc_
 !************   find the depth of AMC, 1100 !LIU
 jinj2 = 1
 do j=1,nz

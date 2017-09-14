@@ -143,7 +143,7 @@ include 'arrays.inc'
 dimension dh(mnx+1),xc(mnx+1)
 !integer,parameter ::ikind=selected_real_kind(p=18)
 !real(8) :: infill_level,xc
-real(8) :: dhext
+!real(8) :: dhext
 !real(kind=ikind):: dh_extrusion,w,dwdt
 
 !EROSION PROCESSES
@@ -184,8 +184,8 @@ if( topo_kappa .gt. 0. ) then
 !   endif
 !end do
      if (rate_inject.ge.vp_) then
-         dm= rate_inject_1 - Vp_
-         v_ext = dm * 5.e3/(cord(1,iinj+3,1)-cord(1,iinj-2,1))
+         dm= rate_inject - Vp_
+         v_ext = dm * 4.e3/(cord(1,iinj+3,1)-cord(1,iinj-2,1))
      else
          v_ext = 0
     endif

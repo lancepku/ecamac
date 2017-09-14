@@ -11,7 +11,7 @@ include 'arrays.inc'
 dimension depl(4)
 dimension s11p(4),s22p(4),s12p(4),s33p(4),s11v(4),s22v(4),s12v(4),s33v(4)
 logical rh_sel
-dimension sarc1(nz+1),sarc2(nz+1)
+!dimension sarc1(nz+1),sarc2(nz+1)
 !==============================================================================
 ! Compute M including effects axial depth
 ! if Zamc < Hc, M = 1
@@ -51,7 +51,7 @@ end do
 HL=0.25*abs(cord(int(Z600),nx/2,2)+cord(int(Z600)+1,nx/2+1,2)+&
 cord(int(Z600)+1,nx/2,2)+cord(int(Z600),nx/2+1,2))+cord(1,nx/2,2)
 !################## cal. HG 
-orgh1 = 3000 ! density between magma and rock                                                                                
+orgh1 = 2000 ! density between magma and rock                                                                                
 orgh2 = 20000 ! density between water and rock                                                                             
 pd = 1.e7 ! driving pressure                                                                                          
 D = -D_axial ! make sure axial depth for valley is positive                                                          
@@ -67,9 +67,9 @@ endif
 rate_inject= min(rate_inject_HG,Vp_)
 !Print *,'HL',HL,'HG',HG,'D',D,'Hc',Hc_
 !print *,'1', rate_inject
-open (10,file='result.dat')
-write(10,*),Zamc,HL,HG,D,rate_inject,Hc_
-close(10)
+!open (10,file='result.dat')
+!write(10,*),Zamc,HL,HG,D,rate_inject,Hc_
+!close(10)
 !########### add magma supply fluctation
 pi = 3.14159
 tau_m = 1.*3.1536e12   ! 0.2Ma                                         
@@ -77,7 +77,7 @@ dM = 0.2
 !d_rate_inject = dM*Vp_*sin((2.*pi*time)/tau_m)
 rate_inject = rate_inject + dM*Vp_*sin((2.*pi*time)/tau_m)
 rate_inject_1 = min(rate_inject,vp_)
-print *, 'M(1)',rate_inject/vp_,'HL',HL,'D',D
+!print *, 'M(1)',rate_inject/vp_,'HL',HL,'D',D
 !################
 !print *,'rate_inject', rate_inject
 !if( mod(nloop,10).eq.0 .OR. ireset.eq.1 ) then
@@ -121,12 +121,12 @@ if (ny_inject.gt.0) then
         rate_inject_a = rate_inject*(1-AB/AC)
 !          print *,rate_inject_a
         rate_inject_d = max(rate_inject_a,0.0)
-         sarc1(j) = -young/(1.-poiss*poiss)*rate_inject_1/dxinj*dt
+!         sarc1(j) = -young/(1.-poiss*poiss)*rate_inject_1/dxinj*dt
 !       sarc1(j)= -young*(1.-poiss)/((1.+poiss)*(1.-2.*poiss))*rate_inject_d/dxinj*dt
-       sarc2(j)= sarc1(j)*poiss/(1.-poiss)
+!       sarc2(j)= sarc1(j)*poiss/(1.-poiss)
 end do
- !        sarc1 = -young/(1.-poiss*poiss)*rate_inject/dxinj*dt
-  !       sarc2 = sarc1*poiss/(1.-poiss)
+         sarc1 = -young/(1.-poiss*poiss)*rate_inject/dxinj*dt
+         sarc2 = sarc1*poiss/(1.-poiss)
          !write(*,*) sarc1,sarc2
 endif
 
@@ -191,8 +191,8 @@ do 3 i = 1,nx-1
             if(ny_inject.gt.0.and.j.le.nelem_inject) then
                 !XXX: iinj is un-init'd if ny_inject is not 1 or 2.
                 if(i.eq.iinj) then
-                    s11p(k) = stress0(j,i,1,k) + stherm +sarc1(j)
-                    s22p(k) = stress0(j,i,2,k) + stherm +sarc2(j)
+                    s11p(k) = stress0(j,i,1,k) + stherm +sarc1!(j)
+                    s22p(k) = stress0(j,i,2,k) + stherm +sarc2!(j)
                     !!            irh = 1
                 endif
             endif

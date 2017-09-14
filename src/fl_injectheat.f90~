@@ -58,7 +58,7 @@ open (10,file='result.dat')
 write(10,*),Zamc,HL,D_axial
 close(10)
 
-rate_inject_c = hc_/Zamc*vp_
+rate_inject_c = Hc_/Zamc*vp_
 rate_inject = min(vp_,rate_inject_c)
 print *,'M',rate_inject/Vp_,'Hc_',Hc_
 !************   find the depth of AMC, 1100 !LIU

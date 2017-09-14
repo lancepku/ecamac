@@ -143,7 +143,7 @@ include 'arrays.inc'
 dimension dh(mnx+1),xc(mnx+1)
 !integer,parameter ::ikind=selected_real_kind(p=18)
 !real(8) :: infill_level,xc
-real(8) :: extrusion_rate,xc,dh_extrusion,w
+real(8) :: dhext
 !real(kind=ikind):: dh_extrusion,w,dwdt
 
 !EROSION PROCESSES
@@ -183,41 +183,9 @@ if( topo_kappa .gt. 0. ) then
 !     dhacc(i) = dhacc(i)
 !   endif
 !end do
-!write(*,*) extrusion_rate,cord(1,nx/2+1,2)
-!###############################
-!extrusion_amount = 200.
-!   do i= 1,nx-1
-!    if (i.ge.nx/2.and.i.le.nx/2+2) then
-!    magmatic_depth = -800.
-!    else 
-!    magmatic_depth = -1000000.
-!    end if 
-!    if (cord(1,i,2) < magmatic_depth)then
-!     dhacc(i) = dhacc(i) + (magamtic_depth+extrusion_amount-cord(1,i,2))
-!     cord(1,i,2) = magmatic_depth + extrusion_amount
-!    end if
-!   enddo
-!write(*,*) cord(1,nx/2+1,2) 
-!######################################
-!infill_level = 0.0 !(Tian: try an infill level) 
- !   do i=1,nx-1
- !     if (i .ge. nx/2-2 .and. i .le. nx/2+2 ) then
- !        infill_level = -500.0
- !     else  
- !        infill_level = -100000000.0
- !     end if  
- !     if (cord(1,i,2) < infill_level)then
- !         dhacc(i) = dhacc(i) + (infill_level - cord(1,i,2))
- !         cord(1,i,2) = infill_level
- !     endif
-!    end do
-!print *,'the height of infill',dhacc(1)
-!############################################  
-!write(*,*) cord(1,iinj,2),dhacc(iinj)
-
      if (rate_inject.ge.vp_) then
-         dm= rate_inject_1 - Vp_
-         v_ext = dm * 5.e3/(cord(1,iinj+3,1)-cord(1,iinj-2,1))
+         dm= rate_inject - Vp_
+         v_ext = dm * 4.e3/(cord(1,iinj+3,1)-cord(1,iinj-2,1))
      else
          v_ext = 0
     endif
@@ -231,10 +199,10 @@ if( topo_kappa .gt. 0. ) then
   end do
 
 
-write(*,*) dhext(iinj-3),dhext(iinj)
-open (10,file='extrusion.dat')
-write (10,*)dhext
-close (10)
+!write(*,*) dhext(iinj-3),dhext(iinj)
+!open (10,file='extrusion.dat')
+!write (10,*)dhext
+!close (10)
 !deallocate(D1d)
 !enddo
 !########################

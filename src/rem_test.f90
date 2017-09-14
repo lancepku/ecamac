@@ -22,8 +22,8 @@ integer function itest_mesh()
   if( mode_rem .eq. 11.or.mode_rem.eq.3 ) then
       testcr = dx_rem * rxbo / (nx-1)
 !      shortening = abs (cord(1,iinj+1,1)-cord(1,iinj-1,1))
-!      shortening = abs(cord(1,nx,1) - cord(1,1,1) - rxbo)
-      shortening = abs (cord(1,1,1)-x0) !for the case adding element on left side,Liu 
+      shortening = abs(cord(1,nx,1) - cord(1,1,1) - rxbo)
+!      shortening = abs (cord(1,1,1)-x0) !for the case adding element on left side,Liu 
      if ( shortening .gt. testcr ) then
           if( dtout_screen .ne. 0 ) then
               print *, 'Remeshing due to shortening required: ', shortening
@@ -32,7 +32,7 @@ integer function itest_mesh()
               call SysMsg('TEST_MESH: Remeshing due to shortening required')
           endif
           itest_mesh = 1
-          iac_rem = 2
+!          iac_rem = 2
         !  incoming_left = 1
           return
       endif

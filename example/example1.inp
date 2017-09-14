@@ -203,7 +203,7 @@ phasedat.inp   ; file with distribution of phase on the 2D grid (phasedat)
 1.0e+18,                     1.e+27,         0,         500.
 ;
 ;igeotherm  g_x0,    g_y0c   g_amplitude  g_width
-1,         30.e+3,  -15.e+3,  8.5e+3,       130.e+3
+1,         30.e+3,  -15.e+3,  10.5e+3,       15.e+3
 ;
 ;Magma Injection: 
 ; ny_inject (0,-no,1-left,2-center), nelem_inject, rate_inject(m/s)
@@ -213,14 +213,14 @@ phasedat.inp   ; file with distribution of phase on the 2D grid (phasedat)
 ;                       R e m e s h i n g
 ;=================================================================
 ;ny_rem (0,1), mode_rem(1, 3 or 11),  ntest_rem,  angle_rem(degrees,when magmainj le 10)
-1            3                200         1.
+1            3                200         5.
 ;
 ; dx_rem (if mode_rem=11 defines critical shortening for remeshing in dx-units)
-1.0
+70.0
 ;
 ; Diffusion of topography(1) and (when-2) also bottom boundary
 ; topo_removal_rate     bottom_kappa0.
-0.0	                     1.0e-4 
+1.e-6	                     1.0e-4 
 ;
 ;=================================================================
 ;                   P r o c e s s   c o n t r o l
@@ -269,7 +269,7 @@ phasedat.inp   ; file with distribution of phase on the 2D grid (phasedat)
 ; saving the last step only (1) or each nsave step (0)
 1
 ;read(4,*)if_hydro, nusselt, xmaxdepth,xmaxt,vp_,Hc_                                        
-0,6,-6.e3,600,14.582e-10,5e3
+0,4,-6.e3,600,14.582e-10,5.5e3
 ; dike heat injection                                                     
 ; left#,right#,top#,bottom#,latentheat,set to 1                                     
 ; iinj1, iinj2, jinj1, jinj2, xlatheat, ratfac                                      
